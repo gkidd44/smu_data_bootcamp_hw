@@ -1,0 +1,70 @@
+Sub stocks()
+    
+    ' init variable to hold the sum
+    Dim totalVolume As Double
+    totalVolume = 0
+    
+    ' keep track of row, and stock
+    Dim stock As String
+    Dim i As Long
+    
+    ' yearly change
+    Dim openPrice As Double
+    Dim closingPrice As Double
+    Dim yearlyChange As Double
+    Dim percentChange As Double
+    
+    ' keep track of SUMMARY TABLE ROW
+    Dim summTableRow As Integer
+    summTableRow = 2
+    
+    openPrice = Cells(2, 3).Value
+    
+    ' for each row
+    For i = 2 To 759001
+        
+        ' get the stock of that row
+        stock = Cells(i, 1).Value
+        
+        ' if the stock in the next row is different...
+        If (stock <> Cells(i + 1, 1).Value) Then
+            ' finish the sum by grabbing value from the last row of the group
+            totalVolume = totalVolume + Cells(i, 7).Value
+            
+            ' by definition, this is the last row of the stock
+            closingPrice = Cells(i, 6).Value
+            yearlyChange = closingPrice - openPrice
+            percentChange = yearlyChange / openPrice
+                        
+            ' write out to the summary table
+            Cells(summTableRow, 9).Value = stock
+            Cells(summTableRow, 10).Value = yearlyChange
+            Cells(summTableRow, 11).Value = percentChange
+            Cells(summTableRow, 12).Value = totalVolume
+            
+            ' color formatting
+            If (yearlyChange > 0) Then
+                Cells(summTableRow, 10).Interior.ColorIndex = 4
+            Else
+                Cells(summTableRow, 10).Interior.ColorIndex = 3
+            End If
+            
+            ' reset the sum for the next credit card (since we know it's different)
+            totalVolume = 0
+            summTableRow = summTableRow + 1
+            
+            ' the next row, (loook ahead) is the first row of the next stock
+            openPrice = Cells(i + 1, 3).Value
+            
+        ' if the next credit card is the same
+        Else
+            ' increment the sum
+            totalVolume = totalVolume + Cells(i, 7).Value
+        End If
+    
+    Next i
+    
+    
+    
+    
+End Sub
