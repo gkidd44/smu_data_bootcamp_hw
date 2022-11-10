@@ -1,0 +1,7 @@
+Three observable trends from the plots of data in Part 1:
+
+1. Temperature is generally higher as a cities latitude is lower, or more towards the equator.
+
+2. Humidity is generally higher as a cities latitude is lower, or more towards the equator.
+
+3. Cloudiness is all over the place, with no real correlation to a cities location, however, cities appear to generally be very cloudy or not cloudy at all. 
