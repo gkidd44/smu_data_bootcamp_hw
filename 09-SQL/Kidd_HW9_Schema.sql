@@ -7,7 +7,7 @@
 CREATE TABLE "departments" (
     "dept_no" varchar(10)   NOT NULL,
     "dept_name" varchar(100)   NOT NULL,
-    "last_updated" timestamp   NOT NULL,
+    "last_updated" timestamp default localtimestamp NOT NULL,
     CONSTRAINT "pk_departments" PRIMARY KEY (
         "dept_no"
      )
@@ -17,7 +17,7 @@ CREATE TABLE "dept_emp" (
     "id" serial   NOT NULL,
     "emp_no" int   NOT NULL,
     "dept_no" varchar(10)   NOT NULL,
-    "last_updated" timestamp   NOT NULL,
+    "last_updated" timestamp default localtimestamp NOT NULL,
     CONSTRAINT "pk_dept_emp" PRIMARY KEY (
         "id"
      )
@@ -27,7 +27,7 @@ CREATE TABLE "dept_manager" (
     "id" serial   NOT NULL,
     "dept_no" varchar(10)   NOT NULL,
     "emp_no" int   NOT NULL,
-    "last_updated" timestamp   NOT NULL,
+    "last_updated" timestamp default localtimestamp  NOT NULL,
     CONSTRAINT "pk_dept_manager" PRIMARY KEY (
         "id"
      )
@@ -41,7 +41,7 @@ CREATE TABLE "employees" (
     "last_name" varchar(100)   NOT NULL,
     "sex" varchar(10)   NOT NULL,
     "hire_date" date   NOT NULL,
-    "last_updated" timestamp   NOT NULL,
+    "last_updated" timestamp default localtimestamp  NOT NULL,
     CONSTRAINT "pk_employees" PRIMARY KEY (
         "emp_no"
      )
@@ -51,7 +51,7 @@ CREATE TABLE "salaries" (
     "id" serial   NOT NULL,
     "emp_no" int   NOT NULL,
     "salary" float   NOT NULL,
-    "last_updated" timestamp   NOT NULL,
+    "last_updated" timestamp  default localtimestamp NOT NULL,
     CONSTRAINT "pk_salaries" PRIMARY KEY (
         "id"
      )
@@ -60,7 +60,7 @@ CREATE TABLE "salaries" (
 CREATE TABLE "titles" (
     "title_id" varchar(10)   NOT NULL,
     "title" varchar(50)   NOT NULL,
-    "last_updated" timestamp   NOT NULL,
+    "last_updated" timestamp default localtimestamp  NOT NULL,
     CONSTRAINT "pk_titles" PRIMARY KEY (
         "title_id"
      )
@@ -83,4 +83,14 @@ REFERENCES "titles" ("title_id");
 
 ALTER TABLE "salaries" ADD CONSTRAINT "fk_salaries_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
+
+
+
+
+
+
+
+
+
+
 
