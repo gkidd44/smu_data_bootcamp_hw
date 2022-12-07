@@ -51,3 +51,30 @@ class SQLHelper():
                     date ASC;
                 """
         return(self.executeQuery(query))
+
+    def specified_start(self, start):
+        query = f"""
+                SELECT 
+                    MIN(tobs) AS TMIN,
+                    AVG(tobs) AS TAVG,
+                    MAX(tobs) AS TMAX
+                FROM 
+                    measurement
+                WHERE
+                    date >= '{start}';
+                """
+        return(self.executeQuery(query))
+
+    def start_and_end(self, start, end):
+        query = f"""
+                SELECT 
+                    MIN(tobs) AS TMIN,
+                    AVG(tobs) AS TAVG,
+                    MAX(tobs) AS TMAX
+                FROM 
+                    measurement
+                WHERE
+                    date >= '{start}' AND date <= '{end}';
+                """
+        return(self.executeQuery(query))
+

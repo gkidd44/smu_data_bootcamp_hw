@@ -16,12 +16,14 @@ sqlHelper = SQLHelper()
 @app.route("/")
 def home():
     return ("""<xmp>
-        Welcome to the SMU HW10 Climate API!
+        Welcome to the Garrett's SMU HW10 Climate API!
 
         Here are the possible routes to go:
         /api/v1.0/precipitation
         /api/v1.0/stations
         /api/v1.0/tobs
+        /api/v1.0/<start>    (put in a date for <start> in the format 2015-09-21)
+        /api/v1.0/<start>/<end>    (put in dates for <start> and <end> in the format 2015-09-21)
         </xmp>""")
 
 
@@ -40,6 +42,18 @@ def get_stations():
 @app.route("/api/v1.0/tobs")
 def get_tobs():
     df = sqlHelper.get_tobs()
+    data = df.to_dict(orient="records")
+    return(jsonify(data))
+
+@app.route("/api/v1.0/<start>")
+def specified_start(start):
+    df = sqlHelper.specified_start(start)
+    data = df.to_dict(orient="records")
+    return(jsonify(data))
+
+@app.route("/api/v1.0/<start>/<end>")
+def start_and_end(start, end):
+    df = sqlHelper.start_and_end(start, end)
     data = df.to_dict(orient="records")
     return(jsonify(data))
 
